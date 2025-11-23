@@ -1,46 +1,55 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link, useLocation } from "wouter";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const [location] = useLocation();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
   const navLinks = [
-    { label: "О нас", href: "#about" },
-    { label: "Залы", href: "#halls" },
-    { label: "Меню", href: "#menu" },
-    { label: "Галерея", href: "#gallery" },
-    { label: "Контакты", href: "#contact" },
+    { label: "О нас", href: "/" },
+    { label: "Меню", href: "/menu" },
+    { label: "Галерея", href: "/gallery" },
+    { label: "Контакты", href: "/contact" },
   ];
+
+  const isActive = (href: string) => {
+    return location === href;
+  };
 
   return (
     <nav className="fixed top-0 w-full bg-background/95 backdrop-blur-sm z-50 shadow-md">
       <div className="container flex justify-between items-center py-4">
         {/* Logo */}
-        <a href="#" className="text-2xl font-bold text-primary font-serif">
-          Qurmet Hall
-        </a>
+        <Link href="/">
+          <span className="text-2xl font-bold text-primary font-serif hover:opacity-80 cursor-pointer">
+            Qurmet Hall
+          </span>
+        </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex gap-8 items-center">
           {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="nav-link"
-            >
-              {link.label}
-            </a>
+            <Link key={link.label} href={link.href}>
+              <span
+                className={`nav-link cursor-pointer ${
+                  isActive(link.href) ? "active" : ""
+                }`}
+              >
+                {link.label}
+              </span>
+            </Link>
           ))}
-          <a href="#booking">
+          <Link href="/contact">
             <Button size="sm" className="bg-primary hover:bg-opacity-90">
               Забронировать
             </Button>
-          </a>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -62,20 +71,23 @@ export default function Navigation() {
         <div className="md:hidden bg-card border-t border-border">
           <div className="container py-4 flex flex-col gap-4">
             {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="nav-link block py-2"
+              <Link key={link.label} href={link.href}>
+                <span
+                  className="nav-link block py-2 cursor-pointer"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.label}
+                </span>
+              </Link>
+            ))}
+            <Link href="/contact">
+              <Button 
+                className="w-full bg-primary hover:bg-opacity-90"
                 onClick={() => setIsOpen(false)}
               >
-                {link.label}
-              </a>
-            ))}
-            <a href="#booking" onClick={() => setIsOpen(false)}>
-              <Button className="w-full bg-primary hover:bg-opacity-90">
                 Забронировать
               </Button>
-            </a>
+            </Link>
           </div>
         </div>
       )}

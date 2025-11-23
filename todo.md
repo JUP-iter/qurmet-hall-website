@@ -59,3 +59,10 @@
 - [x] Gather restaurant images
 - [x] Create website concept and design guidelines
 - [x] Initialize web development project
+
+## New Requests (Current Sprint)
+- [x] Create dedicated Menu page with banquet menu categories and pricing
+- [x] Create dedicated Gallery page with full photo grid
+- [x] Fix navigation routing - Menu, Gallery, and Contact links should navigate to separate pages
+- [x] Integrate Google Maps on contact section showing Qurmet Hall location
+- [x] Update App.tsx routing to handle multiple pages
