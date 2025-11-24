@@ -66,3 +66,6 @@
 - [x] Fix navigation routing - Menu, Gallery, and Contact links should navigate to separate pages
 - [x] Integrate Google Maps on contact section showing Qurmet Hall location
 - [x] Update App.tsx routing to handle multiple pages
+
+## Bug Fixes
+- [x] Fix Google Maps API error on Contact page - use Manus Map component instead of direct API call

@@ -1,7 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { MapView } from "@/components/Map";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
@@ -16,82 +17,36 @@ export default function Contact() {
   });
 
   const [submitted, setSubmitted] = useState(false);
-  const mapContainer = useRef<HTMLDivElement>(null);
   const mapRef = useRef<any>(null);
 
-  // Initialize Google Map using Manus proxy
-  useEffect(() => {
-    const initMap = async () => {
-      if (!mapContainer.current) return;
+  const handleMapReady = (map: any) => {
+    mapRef.current = map;
+    
+    // Add marker for Qurmet Hall
+    const marker = new window.google.maps.marker.AdvancedMarkerElement({
+      map: map,
+      position: { lat: 50.2944, lng: 57.1471 },
+      title: "Qurmet Hall",
+    });
 
-      // Load Google Maps API through Manus proxy
-      const script = document.createElement("script");
-      script.src = "https://maps.googleapis.com/maps/api/js?v=3.55&libraries=marker";
-      script.async = true;
-      script.defer = true;
-      
-      script.onload = () => {
-        if (window.google && mapContainer.current) {
-          const map = new window.google.maps.Map(mapContainer.current, {
-            zoom: 15,
-            center: { lat: 50.2944, lng: 57.1471 },
-            mapTypeControl: true,
-            fullscreenControl: true,
-            streetViewControl: true,
-            styles: [
-              {
-                featureType: "all",
-                elementType: "labels.text.fill",
-                stylers: [{ color: "#333333" }],
-              },
-              {
-                featureType: "water",
-                elementType: "geometry.fill",
-                stylers: [{ color: "#b3d9ff" }],
-              },
-            ],
-          });
+    // Add info window
+    const infoWindow = new window.google.maps.InfoWindow({
+      content: `
+        <div style="padding: 10px; font-family: Arial, sans-serif;">
+          <h3 style="margin: 0 0 5px 0; color: #333;">Qurmet Hall</h3>
+          <p style="margin: 0 0 5px 0; color: #666;">ул. Братьев Жубановых, 276/1</p>
+          <p style="margin: 0; color: #666;">Актобе, Казахстан</p>
+        </div>
+      `,
+    });
 
-          mapRef.current = map;
+    marker.addListener("click", () => {
+      infoWindow.open(map, marker);
+    });
 
-          // Add marker
-          new window.google.maps.Marker({
-            position: { lat: 50.2944, lng: 57.1471 },
-            map: map,
-            title: "Qurmet Hall",
-          });
-
-          // Add info window
-          const infoWindow = new window.google.maps.InfoWindow({
-            content: `
-              <div style="padding: 10px; font-family: Arial, sans-serif;">
-                <h3 style="margin: 0 0 5px 0; color: #333;">Qurmet Hall</h3>
-                <p style="margin: 0 0 5px 0; color: #666;">ул. Братьев Жубановых, 276/1</p>
-                <p style="margin: 0; color: #666;">Актобе, Казахстан</p>
-              </div>
-            `,
-          });
-
-          const marker = new window.google.maps.Marker({
-            position: { lat: 50.2944, lng: 57.1471 },
-            map: map,
-            title: "Qurmet Hall",
-          });
-
-          marker.addListener("click", () => {
-            infoWindow.open(map, marker);
-          });
-
-          // Open info window by default
-          infoWindow.open(map, marker);
-        }
-      };
-
-      document.head.appendChild(script);
-    };
-
-    initMap();
-  }, []);
+    // Open info window by default
+    infoWindow.open(map, marker);
+  };
 
   const handleBookingChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -188,8 +143,10 @@ export default function Contact() {
       <section className="py-16 bg-card">
         <div className="container">
           <h2 className="section-title text-center mb-8">Наше Местоположение</h2>
-          <div
-            ref={mapContainer}
+          <MapView
+            initialCenter={{ lat: 50.2944, lng: 57.1471 }}
+            initialZoom={15}
+            onMapReady={handleMapReady}
             className="w-full h-96 rounded-lg shadow-lg overflow-hidden"
           />
         </div>
