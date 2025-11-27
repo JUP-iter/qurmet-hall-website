@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
 import { MapView } from "@/components/Map";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -16,7 +16,7 @@ export default function Contact() {
     eventType: "wedding",
   });
 
-  const [submitted, setSubmitted] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
   const mapRef = useRef<any>(null);
 
   const handleMapReady = (map: any) => {
@@ -57,20 +57,57 @@ export default function Contact() {
 
   const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Booking submitted:", bookingData);
-    setSubmitted(true);
-    setTimeout(() => {
-      setBookingData({
-        name: "",
-        phone: "",
-        date: "",
-        time: "",
-        guests: "",
-        eventType: "wedding",
-      });
-      setSubmitted(false);
-    }, 3000);
+    
+    // Validate form
+    if (!bookingData.name || !bookingData.phone || !bookingData.date || 
+        !bookingData.time || !bookingData.guests) {
+      alert("Пожалуйста, заполните все поля");
+      return;
+    }
+
+    // Show contact modal
+    setShowContactModal(true);
   };
+
+  const formatBookingMessage = () => {
+    const eventTypeMap: { [key: string]: string } = {
+      wedding: "Свадьба",
+      birthday: "День Рождения",
+      corporate: "Корпоратив",
+      anniversary: "Юбилей",
+      other: "Другое",
+    };
+
+    return `Привет! Я хочу забронировать зал.
+
+Мои данные:
+📝 Имя: ${bookingData.name}
+📱 Телефон: ${bookingData.phone}
+📅 Дата: ${bookingData.date}
+⏰ Время: ${bookingData.time}
+👥 Количество гостей: ${bookingData.guests}
+🎉 Тип мероприятия: ${eventTypeMap[bookingData.eventType]}
+
+Прошу связаться со мной для уточнения деталей.`;
+  };
+
+  const sendToWhatsApp = () => {
+    const message = encodeURIComponent(formatBookingMessage());
+    const whatsappNumber = "77011155151"; // Номер WhatsApp ресторана
+    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
+    setShowContactModal(false);
+    // Reset form
+    setBookingData({
+      name: "",
+      phone: "",
+      date: "",
+      time: "",
+      guests: "",
+      eventType: "wedding",
+    });
+  };
+
+
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -245,14 +282,50 @@ export default function Contact() {
               <Button
                 type="submit"
                 size="lg"
-                className="w-full bg-primary hover:bg-opacity-90"
+                className="w-full bg-primary hover:bg-opacity-90 flex items-center justify-center gap-2"
               >
-                {submitted ? "Спасибо за заявку!" : "Отправить Заявку"}
+                <MessageCircle className="h-5 w-5" />
+                Отправить Заявку
               </Button>
             </div>
           </form>
         </div>
       </section>
+
+      {/* Contact Modal */}
+      {showContactModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-8">
+            <h3 className="text-2xl font-bold mb-6 text-center text-foreground">
+              Выберите способ связи
+            </h3>
+            
+            <div className="space-y-4">
+              <Button
+                onClick={sendToWhatsApp}
+                className="w-full bg-green-500 hover:bg-green-600 text-white py-6 text-lg flex items-center justify-center gap-3"
+              >
+                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-5.031 1.378c-1.536.946-2.504 2.623-2.504 4.472 0 2.662 2.164 4.811 5.044 4.811.842 0 1.643-.154 2.404-.457l2.325 1.039c.953.487 2.26.03 2.486-1.025.112-.527.632-3.129 1.195-4.458.275-.671.26-1.25.084-1.543-.281-.505-.722-.893-1.35-1.232-.288-.16-.745-.347-1.651-.347-1.268 0-2.504.requisites-1.268 0-2.504.requisites"/>
+                </svg>
+                Написать в WhatsApp
+              </Button>
+
+              <Button
+                onClick={() => setShowContactModal(false)}
+                variant="outline"
+                className="w-full py-6 text-lg"
+              >
+                Отмена
+              </Button>
+            </div>
+
+            <p className="text-sm text-gray-600 text-center mt-6">
+              Ваши данные будут отправлены в WhatsApp с готовым текстом
+            </p>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </div>
