@@ -1,5 +1,5 @@
 {
-  "buildCommand": "pnpm install --legacy-peer-deps && pnpm build",
+  "buildCommand": "pnpm install --no-strict-peer-dependencies && pnpm build",
   "outputDirectory": "dist",
   "framework": "vite"
 }
