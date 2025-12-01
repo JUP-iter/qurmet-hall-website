@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Menu, X, Phone } from "lucide-react";
 import { Link, useLocation } from "wouter";
 
 export default function Navigation() {
@@ -45,7 +44,15 @@ export default function Navigation() {
               </span>
             </Link>
           ))}
-
+          <a 
+            href="https://qurmethall.taplink.ws/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGn5CkazDWBfueXi-xmEa8Lk6n7Xd-t8h4nouBChwujMH7G-HEUhSa07WKIsBw_aem_PtcrScYFur8IpZsAUTlWwQ"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="booking-btn"
+          >
+            <Phone className="h-4 w-4" />
+            Забронировать
+          </a>
         </div>
 
         {/* Mobile Menu Button */}
@@ -76,7 +83,16 @@ export default function Navigation() {
                 </span>
               </Link>
             ))}
-
+          <a 
+            href="https://qurmethall.taplink.ws/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGn5CkazDWBfueXi-xmEa8Lk6n7Xd-t8h4nouBChwujMH7G-HEUhSa07WKIsBw_aem_PtcrScYFur8IpZsAUTlWwQ"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="booking-btn"
+            onClick={() => setIsOpen(false)}
+          >
+            <Phone className="h-4 w-4" />
+            Забронировать
+          </a>
           </div>
         </div>
       )}

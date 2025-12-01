@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Phone, Mail, MapPin } from "lucide-react";
+import YandexMap from "./YandexMap";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -6,6 +7,12 @@ export default function Footer() {
   return (
     <footer className="bg-card border-t border-border">
       <div className="container py-12">
+        {/* Yandex Map Section */}
+        <div className="mb-12">
+          <h3 className="text-2xl font-bold mb-4 font-serif text-primary">Найти нас на карте</h3>
+          <YandexMap />
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* About */}
           <div>
@@ -102,7 +109,7 @@ export default function Footer() {
         <div className="border-t border-border pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
             <p>
-              &copy; {currentYear} Qurmet Hall. Все права защищены.
+              &copy; {currentYear} Qurmet Hall. Банкетный зал в Актобе. Все права защищены.
             </p>
             <div className="flex gap-6">
               <a href="#" className="hover:text-primary">
