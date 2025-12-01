@@ -1,45 +1,9 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Phone, MapPin, Mail, ChevronRight } from "lucide-react";
+import { Phone, MapPin, Mail } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
 export default function Home() {
-  const [bookingData, setBookingData] = useState({
-    name: "",
-    phone: "",
-    date: "",
-    time: "",
-    guests: "",
-    eventType: "wedding",
-  });
-
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleBookingChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    setBookingData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleBookingSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Booking submitted:", bookingData);
-    setSubmitted(true);
-    setTimeout(() => {
-      setBookingData({
-        name: "",
-        phone: "",
-        date: "",
-        time: "",
-        guests: "",
-        eventType: "wedding",
-      });
-      setSubmitted(false);
-    }, 3000);
-  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -61,11 +25,7 @@ export default function Home() {
           <p className="text-lg mb-8 font-light">
             Банкетный зал вместимостью до 500 гостей в Актобе
           </p>
-          <a href="#booking">
-            <Button size="lg" className="bg-primary hover:bg-opacity-90">
-              Забронировать Дату
-            </Button>
-          </a>
+
         </div>
       </section>
 
@@ -85,11 +45,7 @@ export default function Home() {
                 свадьба, юбилей или масштабный корпоратив, в незабываемую
                 историю, наполненную изыском и вниманием к деталям.
               </p>
-              <a href="#halls">
-                <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white">
-                  Узнать больше о нас <ChevronRight className="ml-2 h-4 w-4" />
-                </Button>
-              </a>
+
             </div>
             <div className="rounded-lg overflow-hidden shadow-lg">
               <img
@@ -209,109 +165,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Booking Section */}
-      <section id="booking" className="py-16 bg-card">
-        <div className="container">
-          <h2 className="section-title text-center mb-12">
-            Забронируйте Ваше Торжество
-          </h2>
-          <form onSubmit={handleBookingSubmit} className="booking-form">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="form-group">
-                <label className="form-label">Ваше Имя *</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={bookingData.name}
-                  onChange={handleBookingChange}
-                  className="form-input"
-                  required
-                  placeholder="Иван Иванов"
-                />
-              </div>
 
-              <div className="form-group">
-                <label className="form-label">Телефон *</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={bookingData.phone}
-                  onChange={handleBookingChange}
-                  className="form-input"
-                  required
-                  placeholder="+7 (700) XXX-XX-XX"
-                />
-              </div>
-
-              <div className="form-group">
-                <label className="form-label">Дата Мероприятия *</label>
-                <input
-                  type="date"
-                  name="date"
-                  value={bookingData.date}
-                  onChange={handleBookingChange}
-                  className="form-input"
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label className="form-label">Время *</label>
-                <input
-                  type="time"
-                  name="time"
-                  value={bookingData.time}
-                  onChange={handleBookingChange}
-                  className="form-input"
-                  required
-                />
-              </div>
-
-              <div className="form-group">
-                <label className="form-label">Количество Гостей *</label>
-                <input
-                  type="number"
-                  name="guests"
-                  value={bookingData.guests}
-                  onChange={handleBookingChange}
-                  className="form-input"
-                  required
-                  placeholder="100"
-                  min="10"
-                  max="500"
-                />
-              </div>
-
-              <div className="form-group">
-                <label className="form-label">Тип Мероприятия *</label>
-                <select
-                  name="eventType"
-                  value={bookingData.eventType}
-                  onChange={handleBookingChange}
-                  className="form-input"
-                  required
-                >
-                  <option value="wedding">Свадьба</option>
-                  <option value="birthday">День Рождения</option>
-                  <option value="corporate">Корпоратив</option>
-                  <option value="anniversary">Юбилей</option>
-                  <option value="other">Другое</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="mt-8">
-              <Button
-                type="submit"
-                size="lg"
-                className="w-full bg-primary hover:bg-opacity-90"
-              >
-                {submitted ? "Спасибо за заявку!" : "Отправить Заявку"}
-              </Button>
-            </div>
-          </form>
-        </div>
-      </section>
 
       {/* Contact Section */}
       <section className="py-16 bg-background">

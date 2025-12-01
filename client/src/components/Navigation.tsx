@@ -15,7 +15,7 @@ export default function Navigation() {
     { label: "О нас", href: "/" },
     { label: "Меню", href: "/menu" },
     { label: "Галерея", href: "/gallery" },
-    { label: "Контакты", href: "/contact" },
+    { label: "Команда", href: "/staff" },
   ];
 
   const isActive = (href: string) => {
@@ -45,11 +45,7 @@ export default function Navigation() {
               </span>
             </Link>
           ))}
-          <Link href="/contact">
-            <Button size="sm" className="bg-primary hover:bg-opacity-90">
-              Забронировать
-            </Button>
-          </Link>
+
         </div>
 
         {/* Mobile Menu Button */}
@@ -80,14 +76,7 @@ export default function Navigation() {
                 </span>
               </Link>
             ))}
-            <Link href="/contact">
-              <Button 
-                className="w-full bg-primary hover:bg-opacity-90"
-                onClick={() => setIsOpen(false)}
-              >
-                Забронировать
-              </Button>
-            </Link>
+
           </div>
         </div>
       )}

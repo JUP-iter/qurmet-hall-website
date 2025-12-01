@@ -7,7 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 import Gallery from "./pages/Gallery";
-import Contact from "./pages/Contact";
+import Staff from "./pages/Staff";
 
 function Router() {
   return (
@@ -15,7 +15,7 @@ function Router() {
       <Route path={"/"} component={Home} />
       <Route path={"/menu"} component={Menu} />
       <Route path={"/gallery"} component={Gallery} />
-      <Route path={"/contact"} component={Contact} />
+      <Route path={"/staff"} component={Staff} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

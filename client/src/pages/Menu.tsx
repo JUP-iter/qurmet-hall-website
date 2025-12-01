@@ -1,223 +1,195 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { ChevronRight } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { useLocation } from "wouter";
+
+const menuCategories = [
+  {
+    id: 1,
+    name: "Закуски",
+    items: [
+      { name: "Крем-суп из грибов", price: "2,500 ₸" },
+      { name: "Салат Цезарь", price: "3,000 ₸" },
+      { name: "Тартар из лосося", price: "4,500 ₸" }
+    ]
+  },
+  {
+    id: 2,
+    name: "Основные блюда",
+    items: [
+      { name: "Стейк Рибай", price: "8,500 ₸" },
+      { name: "Филе миньон", price: "9,500 ₸" },
+      { name: "Лосось на гриле", price: "7,500 ₸" }
+    ]
+  },
+  {
+    id: 3,
+    name: "Гарниры",
+    items: [
+      { name: "Картофель фри", price: "1,500 ₸" },
+      { name: "Овощи гриль", price: "2,000 ₸" },
+      { name: "Рис басмати", price: "1,800 ₸" }
+    ]
+  },
+  {
+    id: 4,
+    name: "Десерты",
+    items: [
+      { name: "Шоколадный фондан", price: "2,500 ₸" },
+      { name: "Панна-котта", price: "2,000 ₸" },
+      { name: "Торт Наполеон", price: "2,800 ₸" }
+    ]
+  },
+  {
+    id: 5,
+    name: "Напитки",
+    items: [
+      { name: "Красное вино", price: "от 5,000 ₸" },
+      { name: "Шампанское", price: "от 8,000 ₸" },
+      { name: "Коктейли", price: "от 3,000 ₸" }
+    ]
+  }
+];
+
+const dishesWithPhotos = [
+  { name: "Стейк Рибай", description: "Премиум качество мяса" },
+  { name: "Лосось на гриле", description: "Свежий лосось с овощами" },
+  { name: "Салат Цезарь", description: "Классический рецепт" },
+  { name: "Шоколадный фондан", description: "Нежный шоколадный десерт" },
+  { name: "Панна-котта", description: "Итальянский десерт" },
+  { name: "Коктейли", description: "Авторские коктейли" }
+];
 
 export default function Menu() {
-  const [, navigate] = useLocation();
-
-  const menuCategories = [
-    {
-      name: "Закуски",
-      description: "Разнообразные закуски из казахской и европейской кухни",
-      items: [
-        "Казахский плов с мясом",
-        "Бешбармак (традиционное блюдо)",
-        "Манты (мясные пельмени)",
-        "Салат из овощей с йогуртом",
-        "Копченая рыба с травами",
-      ],
-    },
-    {
-      name: "Основные Блюда",
-      description: "Изысканные основные блюда для вашего торжества",
-      items: [
-        "Шашлык из говядины и баранины",
-        "Куриное филе с овощами",
-        "Стейк из мраморной говядины",
-        "Рыба на гриле с лимоном",
-        "Ягненок с розмарином и картофелем",
-      ],
-    },
-    {
-      name: "Гарниры и Салаты",
-      description: "Свежие гарниры и салаты к основным блюдам",
-      items: [
-        "Картофель по-деревенски",
-        "Рис с овощами",
-        "Греческий салат",
-        "Цезарь с курицей",
-        "Овощное ассорти на гриле",
-      ],
-    },
-    {
-      name: "Десерты",
-      description: "Сладкие завершения вашего праздника",
-      items: [
-        "Шоколадный торт с ягодами",
-        "Панна-котта с фруктами",
-        "Эклеры с кремом",
-        "Фруктовый салат со сливками",
-        "Традиционные казахские сладости",
-      ],
-    },
-    {
-      name: "Напитки",
-      description: "Выбор напитков для вашего мероприятия",
-      items: [
-        "Вино (красное и белое)",
-        "Пиво (местное и импортное)",
-        "Шампанское",
-        "Коктейли на заказ",
-        "Безалкогольные напитки",
-      ],
-    },
-  ];
-
-  const pricingTiers = [
-    {
-      name: "Стандартный",
-      price: "5,000₸",
-      perPerson: "за человека",
-      features: [
-        "3 закуски",
-        "2 основных блюда",
-        "1 гарнир",
-        "1 салат",
-        "1 напиток",
-      ],
-    },
-    {
-      name: "Премиум",
-      price: "8,500₸",
-      perPerson: "за человека",
-      features: [
-        "5 закусок",
-        "3 основных блюда",
-        "2 гарнира",
-        "2 салата",
-        "2 напитка",
-        "Десерт",
-      ],
-      highlighted: true,
-    },
-    {
-      name: "Люкс",
-      price: "12,000₸",
-      perPerson: "за человека",
-      features: [
-        "7 закусок",
-        "4 основных блюда",
-        "3 гарнира",
-        "3 салата",
-        "3 напитка",
-        "2 десерта",
-        "Фруктовое ассорти",
-      ],
-    },
-  ];
-
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-background">
       <Navigation />
-
-      {/* Hero Section */}
-      <section
-        className="hero-section mt-16"
-        style={{
-          backgroundImage: "url('/84YfQn6zyX1f.jpg')",
-        }}
-      >
-        <div className="hero-overlay"></div>
-        <div className="hero-content">
-          <h1 className="hero-title">Наше Меню</h1>
-          <p className="hero-subtitle">
-            Изысканные блюда для вашего торжества
-          </p>
-        </div>
-      </section>
-
-      {/* Menu Categories */}
-      <section className="py-16 bg-background">
-        <div className="container">
-          <h2 className="section-title text-center mb-12">Категории Блюд</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {menuCategories.map((category) => (
-              <Card key={category.name} className="p-6 hover:shadow-lg transition-shadow">
-                <h3 className="text-2xl font-bold mb-2 text-primary">{category.name}</h3>
-                <p className="text-muted-foreground mb-4">{category.description}</p>
-                <ul className="space-y-2">
-                  {category.items.map((item) => (
-                    <li key={item} className="text-foreground text-sm flex items-start">
-                      <span className="text-primary mr-2">•</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </Card>
-            ))}
+      
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section className="bg-gradient-to-r from-[#800020] to-[#600018] text-white py-16">
+          <div className="container mx-auto px-4">
+            <h1 className="text-5xl font-bold mb-4 font-serif">Наше Меню</h1>
+            <p className="text-xl opacity-90">Изысканные блюда для ваших торжественных мероприятий</p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Pricing Tiers */}
-      <section className="py-16 bg-card">
-        <div className="container">
-          <h2 className="section-title text-center mb-12">Пакеты Обслуживания</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {pricingTiers.map((tier) => (
-              <Card
-                key={tier.name}
-                className={`p-8 flex flex-col ${
-                  tier.highlighted
-                    ? "border-2 border-primary shadow-lg scale-105"
-                    : "hover:shadow-lg transition-shadow"
-                }`}
-              >
-                {tier.highlighted && (
-                  <div className="bg-primary text-primary-foreground px-4 py-2 rounded-lg mb-4 text-center font-semibold text-sm">
-                    ПОПУЛЯРНЫЙ
+        {/* Photo Gallery Section */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center mb-12 font-serif text-[#800020]">Наши Блюда</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {dishesWithPhotos.map((dish, index) => (
+                <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                  {/* Photo Placeholder */}
+                  <div className="w-full h-64 bg-gradient-to-br from-[#C8A25C] to-[#800020] flex items-center justify-center text-white">
+                    <div className="text-center">
+                      <p className="text-2xl mb-2">📸</p>
+                      <p className="text-lg font-semibold">Фото блюда</p>
+                      <p className="text-sm opacity-75 mt-2">(Вставьте изображение)</p>
+                    </div>
                   </div>
-                )}
-                <h3 className="text-2xl font-bold mb-2">{tier.name}</h3>
-                <div className="mb-6">
-                  <span className="text-4xl font-bold text-primary">{tier.price}</span>
-                  <p className="text-muted-foreground text-sm">{tier.perPerson}</p>
+                  
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold text-[#800020] mb-2 font-serif">{dish.name}</h3>
+                    <p className="text-gray-600">{dish.description}</p>
+                  </div>
                 </div>
-                <ul className="space-y-3 mb-8 flex-grow">
-                  {tier.features.map((feature) => (
-                    <li key={feature} className="flex items-start">
-                      <ChevronRight className="h-5 w-5 text-primary mr-2 flex-shrink-0 mt-0.5" />
-                      <span className="text-foreground">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Button
-                  onClick={() => navigate("/contact")}
-                  className={`w-full ${
-                    tier.highlighted
-                      ? "bg-primary hover:bg-opacity-90"
-                      : "border-primary text-primary hover:bg-primary hover:text-white"
-                  }`}
-                  variant={tier.highlighted ? "default" : "outline"}
-                >
-                  Выбрать Пакет
-                </Button>
-              </Card>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-background">
-        <div className="container text-center">
-          <h2 className="section-title mb-4">Индивидуальное Меню</h2>
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Мы можем создать индивидуальное меню в соответствии с вашими предпочтениями и
-            бюджетом. Свяжитесь с нами для консультации.
-          </p>
-          <Button
-            onClick={() => navigate("/contact")}
-            size="lg"
-            className="bg-primary hover:bg-opacity-90"
-          >
-            Связаться с Нами
-          </Button>
-        </div>
-      </section>
+        {/* Menu Categories Section */}
+        <section className="py-16 bg-[#F5F5F5]">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center mb-12 font-serif text-[#800020]">Меню по Категориям</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {menuCategories.map((category) => (
+                <div key={category.id} className="bg-white rounded-lg shadow-md p-8">
+                  <h3 className="text-2xl font-bold text-[#800020] mb-6 font-serif border-b-2 border-[#C8A25C] pb-3">
+                    {category.name}
+                  </h3>
+                  
+                  <div className="space-y-4">
+                    {category.items.map((item, idx) => (
+                      <div key={idx} className="flex justify-between items-start">
+                        <div className="flex-1">
+                          <p className="font-semibold text-gray-800">{item.name}</p>
+                        </div>
+                        <p className="text-[#C8A25C] font-bold ml-4">{item.price}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Pricing Tiers */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center mb-12 font-serif text-[#800020]">Пакеты Обслуживания</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Standard */}
+              <div className="bg-white border-2 border-gray-200 rounded-lg p-8 hover:border-[#C8A25C] transition-colors">
+                <h3 className="text-2xl font-bold text-[#800020] mb-4 font-serif">Стандарт</h3>
+                <p className="text-4xl font-bold text-[#C8A25C] mb-6">5,000 ₸</p>
+                <p className="text-gray-600 mb-6">за человека</p>
+                <ul className="space-y-3 text-gray-700">
+                  <li>✓ 3 основных блюда</li>
+                  <li>✓ Закуски и гарниры</li>
+                  <li>✓ Напитки (без алкоголя)</li>
+                  <li>✓ Обслуживание</li>
+                </ul>
+              </div>
+
+              {/* Premium */}
+              <div className="bg-gradient-to-b from-[#C8A25C] to-[#B8922C] rounded-lg p-8 text-white shadow-lg transform scale-105">
+                <div className="absolute top-0 right-0 bg-[#800020] text-white px-4 py-2 rounded-bl-lg font-bold">
+                  Популярно
+                </div>
+                <h3 className="text-2xl font-bold mb-4 font-serif">Премиум</h3>
+                <p className="text-4xl font-bold mb-6">8,500 ₸</p>
+                <p className="mb-6">за человека</p>
+                <ul className="space-y-3">
+                  <li>✓ 5 основных блюд</li>
+                  <li>✓ Премиум закуски</li>
+                  <li>✓ Вино и напитки</li>
+                  <li>✓ Профессиональное обслуживание</li>
+                  <li>✓ Десерты</li>
+                </ul>
+              </div>
+
+              {/* Luxury */}
+              <div className="bg-white border-2 border-[#800020] rounded-lg p-8 hover:shadow-lg transition-shadow">
+                <h3 className="text-2xl font-bold text-[#800020] mb-4 font-serif">Люкс</h3>
+                <p className="text-4xl font-bold text-[#C8A25C] mb-6">12,000 ₸</p>
+                <p className="text-gray-600 mb-6">за человека</p>
+                <ul className="space-y-3 text-gray-700">
+                  <li>✓ Авторское меню</li>
+                  <li>✓ Премиум ингредиенты</li>
+                  <li>✓ Премиум напитки</li>
+                  <li>✓ VIP обслуживание</li>
+                  <li>✓ Персональный шеф-повар</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-16 bg-gradient-to-r from-[#800020] to-[#600018] text-white">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-4xl font-bold mb-6 font-serif">Заинтересованы?</h2>
+            <p className="text-xl mb-8 opacity-90">Свяжитесь с нами для обсуждения вашего мероприятия</p>
+            <a href="tel:+77001155151" className="inline-block bg-[#C8A25C] text-[#800020] font-bold py-3 px-8 rounded-lg hover:bg-[#B8922C] transition-colors">
+              Позвонить
+            </a>
+          </div>
+        </section>
+      </main>
 
       <Footer />
     </div>
