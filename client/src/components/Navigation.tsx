@@ -14,7 +14,6 @@ export default function Navigation() {
     { label: "О нас", href: "/" },
     { label: "Меню", href: "/menu" },
     { label: "Галерея", href: "/gallery" },
-    { label: "Команда", href: "/staff" },
   ];
 
   const isActive = (href: string) => {

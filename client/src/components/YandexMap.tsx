@@ -6,7 +6,7 @@ export default function YandexMap() {
   useEffect(() => {
     // Load Yandex Maps API
     const script = document.createElement("script");
-    script.src = "https://api-maps.yandex.ru/2.1/?apikey=de72fcbe-6697-4866-8751-5a8c0516045f&lang=ru_RU";
+    script.src = "https://api-maps.yandex.ru/2.1/?apikey=YOUR_YANDEX_API_KEY&lang=ru_RU";
     script.type = "text/javascript";
     script.async = true;
     script.onload = () => {

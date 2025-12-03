@@ -127,7 +127,57 @@ export default function Menu() {
         </section>
 
         {/* Pricing Tiers */}
-        
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center mb-12 font-serif text-[#800020]">Пакеты Обслуживания</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Standard */}
+              <div className="bg-white border-2 border-gray-200 rounded-lg p-8 hover:border-[#C8A25C] transition-colors">
+                <h3 className="text-2xl font-bold text-[#800020] mb-4 font-serif">Стандарт</h3>
+                <p className="text-4xl font-bold text-[#C8A25C] mb-6">5,000 ₸</p>
+                <p className="text-gray-600 mb-6">за человека</p>
+                <ul className="space-y-3 text-gray-700">
+                  <li>✓ 3 основных блюда</li>
+                  <li>✓ Закуски и гарниры</li>
+                  <li>✓ Напитки (без алкоголя)</li>
+                  <li>✓ Обслуживание</li>
+                </ul>
+              </div>
+
+              {/* Premium */}
+              <div className="bg-gradient-to-b from-[#C8A25C] to-[#B8922C] rounded-lg p-8 text-white shadow-lg transform scale-105">
+                <div className="absolute top-0 right-0 bg-[#800020] text-white px-4 py-2 rounded-bl-lg font-bold">
+                  Популярно
+                </div>
+                <h3 className="text-2xl font-bold mb-4 font-serif">Премиум</h3>
+                <p className="text-4xl font-bold mb-6">8,500 ₸</p>
+                <p className="mb-6">за человека</p>
+                <ul className="space-y-3">
+                  <li>✓ 5 основных блюд</li>
+                  <li>✓ Премиум закуски</li>
+                  <li>✓ Вино и напитки</li>
+                  <li>✓ Профессиональное обслуживание</li>
+                  <li>✓ Десерты</li>
+                </ul>
+              </div>
+
+              {/* Luxury */}
+              <div className="bg-white border-2 border-[#800020] rounded-lg p-8 hover:shadow-lg transition-shadow">
+                <h3 className="text-2xl font-bold text-[#800020] mb-4 font-serif">Люкс</h3>
+                <p className="text-4xl font-bold text-[#C8A25C] mb-6">12,000 ₸</p>
+                <p className="text-gray-600 mb-6">за человека</p>
+                <ul className="space-y-3 text-gray-700">
+                  <li>✓ Авторское меню</li>
+                  <li>✓ Премиум ингредиенты</li>
+                  <li>✓ Премиум напитки</li>
+                  <li>✓ VIP обслуживание</li>
+                  <li>✓ Персональный шеф-повар</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* CTA Section */}
         <section className="py-16 bg-gradient-to-r from-[#800020] to-[#600018] text-white">
