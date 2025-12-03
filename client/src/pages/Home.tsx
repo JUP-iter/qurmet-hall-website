@@ -69,7 +69,7 @@ export default function Home() {
                 alt="Main Hall"
                 className="w-full h-48 object-cover rounded-lg mb-4"
               />
-              <h3 className="text-2xl font-bold mb-2">Главный Зал</h3>
+              <h3 className="text-2xl font-bold mb-2">Большой Зал</h3>
               <p className="text-muted-foreground mb-4">
                 Вместимость до 500 гостей
               </p>
@@ -77,7 +77,7 @@ export default function Home() {
                 Роскошный зал с хрустальными люстрами, золотыми акцентами и
                 современным техническим оснащением.
               </p>
-            </Card>
+            </Card> 
 
             <Card className="p-6 hover:shadow-lg transition-shadow">
               <img
@@ -85,9 +85,9 @@ export default function Home() {
                 alt="VIP Hall"
                 className="w-full h-48 object-cover rounded-lg mb-4"
               />
-              <h3 className="text-2xl font-bold mb-2">VIP Зал</h3>
+              <h3 className="text-2xl font-bold mb-2">Малый Зал</h3>
               <p className="text-muted-foreground mb-4">
-                Вместимость до 150 гостей
+                Вместимость до 180 гостей
               </p>
               <p className="text-foreground">
                 Банкетный зал для небольших торжеств с персональным сервисом и
@@ -186,8 +186,8 @@ export default function Home() {
               <Phone className="h-12 w-12 mx-auto mb-4 text-primary" />
               <h3 className="text-xl font-bold mb-2">Телефон</h3>
               <p className="text-foreground">
-                <a href="tel:+77001234567" className="hover:text-primary">
-                  +7 (700) 123-45-67
+                <a href="tel:+77011155151" className="hover:text-primary">
+                  +7 (701) 115-51-51
                 </a>
                 <br />
                 Ежедневно, 10:00 - 02:00
